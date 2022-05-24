@@ -2,7 +2,7 @@
 
 <!-- Formulario Filtro de búsqueda, se ve cuando la AccionABMC es
 "L"(busqueda/listado)-->
-<form name="FormBusqueda" class="bg-light" >
+<form name="FormBusqueda" class="bg-light" *ngIf="AccionABMC == 'L'">
     <div class="form-group row">
     <label class="col-form-label col-sm-2 offset-sm-1">
     Nombre:
