@@ -1,7 +1,7 @@
 export interface ArticuloFamilia {
     IdArticuloFamilia: number;
     Nombre: string;
-  }
+}
 
 export const ArticulosFamilias: ArticuloFamilia[] = [
 { IdArticuloFamilia: 1, Nombre: "Accesorios" },
