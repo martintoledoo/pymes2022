@@ -4,6 +4,8 @@ import { ArticuloFamilia } from "../../models/articulo-familia";
 import { MockArticulosService } from "../../services/mock-articulos.service";
 import { MockArticulosFamiliasService } from "../../services/mock-articulos-familias.service";
 
+import {  FormGroup, FormControl, Validators } from "@angular/forms";
+
 @Component({
   selector: 'app-articulos',
   templateUrl: './articulos.component.html',
@@ -57,12 +59,14 @@ export class ArticulosComponent implements OnInit {
 
   Agregar() {
     this.AccionABMC = "A";
+    this.FormRegistro.reset({ Activo: true, IdArticulo: 0 });
   }
 
-  // Buscar segun los filtros, establecidos en FormRegistro
-  Buscar() {
-    this.articulosService
-    .get('', null, this.Pagina)
+
+ // Buscar segun los filtros, establecidos en FormRegistro
+ Buscar() {
+  this.articulosService
+    .get(this.FormBusqueda.value.Nombre, this.FormBusqueda.value.Activo, this.Pagina)      
     .subscribe((res: any) => {
       this.Items = res.Items;
       this.RegistrosTotal = res.RegistrosTotal;
@@ -107,4 +111,25 @@ export class ArticulosComponent implements OnInit {
   ImprimirListado() {
     alert('Sin desarrollar...');
   }
+
+
+
+  FormBusqueda = new FormGroup({
+    Nombre: new FormControl(null),
+    Activo: new FormControl(null),
+  });
+
+  FormRegistro = new FormGroup({
+    IdArticulo: new FormControl(0),
+    Nombre: new FormControl(''),
+    Precio: new FormControl(null),
+    Stock: new FormControl(null),
+    CodigoDeBarra: new FormControl (''),
+    IdArticuloFamilia: new FormControl(''),
+    FechaAlta: new FormControl(''),
+    Activo: new FormControl(true),
+  });
+
+  
+
 }
