@@ -8,13 +8,22 @@
         Nombre:
         </label>
         <div class="col-sm-3">
-            <input type="text" name="Nombre" class="form-control" formControlName="Nombre"/>
+            <input type="text" name="Nombre" class="form-control text-uppercase" formControlName="Nombre"/>
+            <div class="text-danger" [ngClass]="{'is-invalid':(FormRegistro.controls.Nombre.touched || submitted)
+            && FormRegistro.controls.Nombre.errors}">
+            Dato requerido.
+            </div>
+            <div class="text-danger" *ngIf="
+                FormRegistro.controls.Nombre.errors?.minlength ||
+                FormRegistro.controls.Nombre.errors?.maxlength ">
+                Dato texto, 4 a 55 caracteres.
+            </div>
         </div>
         <label class="col-form-label col-sm-2 offset-sm-1">
             Activo:
         </label>
         <div class="col-sm-3">
-            <select class="form-control" name="Activo" >
+            <select class="form-control text-uppercase" name="Activo" >
                 <option *ngFor="let opt of OpcionesActivo" [ngValue]="opt.Id">
                     {{ opt.Nombre }}
                 </option>
@@ -53,7 +62,7 @@
 <tbody>
 <tr *ngFor="let item of Items">
 <td>{{item.Nombre | uppercase}}</td>
-<td class="text-right">{{item.Precio | currency}}</td>
+<td class="text-right">{{item.Precio | currency:'$'}}</td>
 <td class="text-right">{{item.Stock}}</td>
 <td>{{item.FechaAlta| date:'dd/MM/yyyy'}}</td>
 <td>{{item.Activo ? 'SI' : 'NO'}}</td>
@@ -84,7 +93,7 @@ title="{{item.Activo ? 'Desactivar':'Activar'}}"
 <span class="label label-default">Registros: {{RegistrosTotal}}</span>
 </div>
 <div class="col text-center">
-Directiva paginador aqui
+<ngb-pagination [(page)]="Pagina" (pageChange)="Buscar()" [pageSize]="10" [maxSize]="10" [collectionSize]="RegistrosTotal"></ngb-pagination>
 </div>
 <div class="col text-right">
     <button type="button" class="btn btn-primary"
@@ -113,7 +122,16 @@ Directiva paginador aqui
     Nombre <span class="text-danger">*</span>
     </label>
     <div class="col-sm-6">
-        <input type="text" class="form-control"   formControlName="Nombre"/>
+        <input type="text" class="form-control text-uppercase"   formControlName="Nombre"/>
+        <div class="text-danger" [ngClass]="{'is-invalid':(FormRegistro.controls.Nombre.touched || submitted)
+        && FormRegistro.controls.Nombre.errors}">
+        Dato requerido.
+        </div>
+        <div class="text-danger" *ngIf="
+                FormRegistro.controls.Nombre.errors?.minlength ||
+                FormRegistro.controls.Nombre.errors?.maxlength ">
+                Dato texto, 4 a 55 caracteres.
+            </div>
     </div>
     </div>
     <!--campo precio-->
@@ -122,7 +140,14 @@ Directiva paginador aqui
     Precio <span class="text-danger">*</span>
     </label>
     <div class="col-sm-6">
-    <input type="text" name="Precio" class="form-control" formControlName="Nombre" />
+    <input type="text" name="Precio" class="form-control text-uppercase" formControlName="Nombre" />
+    <div class="text-danger" [ngClass]="{'is-invalid':(FormRegistro.controls.Precio.touched || submitted)
+    && FormRegistro.controls.Precio.errors}">
+    Dato requerido.
+    </div>
+    <div class="text-danger" *ngIf="FormRegistro.controls.Precio.errors?.pattern">
+        Dato numérico, 1 a 7 dígitos.
+        </div>
     </div>
 </div>
 <!--campo stock-->
@@ -131,7 +156,14 @@ Directiva paginador aqui
 Stock <span class="text-danger">*</span>
 </label>
 <div class="col-sm-6">
-<input type="text" name="Stock" class="form-control" formControlName="Nombre" />
+<input type="text" name="Stock" class="form-control text-uppercase" formControlName="Nombre" />
+<div class="text-danger" [ngClass]="{'is-invalid':(FormRegistro.controls.Stock.touched || submitted)
+&& FormRegistro.controls.Stock.errors}">
+Dato requerido.
+</div>
+<div class="text-danger" *ngIf="FormRegistro.controls.Stock.errors?.pattern">
+    Dato numérico, 1 a 7 dígitos.
+    </div>
 </div>
 </div>
 <!--campo codigodebarra-->
@@ -140,7 +172,14 @@ Stock <span class="text-danger">*</span>
 Codigo De Barra <span class="text-danger">*</span>
 </label>
 <div class="col-sm-6">
-<input type="text" name="CodigoDeBarra" class="form-control" formControlName="Nombre"/>
+<input type="text" name="CodigoDeBarra" class="form-control text-uppercase" formControlName="Nombre"/>
+<div class="text-danger" [ngClass]="{'is-invalid':(FormRegistro.controls.CodigoDeBarra.touched || submitted)
+&& FormRegistro.controls.CodigoDeBarra.errors}">
+Dato requerido.
+</div>
+<div class="text-danger" *ngIf="FormRegistro.controls.CodigoDeBarra.errors?.pattern">
+    Dato numérico, 1 a 7 dígitos.
+    </div>
 </div>
 </div>
 <!--campo idarticulofamilia-->
@@ -149,7 +188,7 @@ Codigo De Barra <span class="text-danger">*</span>
 Familia <span class="text-danger">*</span>
 </label>
 <div class="col-sm-6">
-<select name="IdArticuloFamilia" class="form-control">
+<select name="IdArticuloFamilia" class="form-control text-uppercase">
 <option *ngFor="let opt of Familias" [ngValue]="opt.IdArticuloFamilia">
     {{ opt.Nombre }}
 </option>
@@ -162,14 +201,21 @@ Familia <span class="text-danger">*</span>
 Fecha de alta <span class="text-danger">*</span>
 </label>
 <div class="col-sm-6">
-    <input class="form-control" name="FechaAlta" formControlName="Nombre"/>
+    <input class="form-control text-uppercase" name="FechaAlta" formControlName="Nombre"/>
+    <div class="text-danger" [ngClass]="{'is-invalid':(FormRegistro.controls.FechaAlta.touched || submitted)
+    && FormRegistro.controls.FechaAlta.errors}">
+    Dato requerido.
+    </div>
+    <div class="text-danger" *ngIf="FormRegistro.controls.FechaAlta.errors?.pattern">
+        Dato fecha, formato dd/mm/aaaa.
+        </div>
     </div>
     </div>
     <!--campo activo-->
     <div class="form-group row">
     <label class="col-form-label col-sm-2 offset-sm-2" for="Activo">Activo</label>
     <div class="col-sm-6">
-    <select name="Activo" [attr.disabled]="true" class="form-control">
+    <select name="Activo" [attr.disabled]="true" class="form-control text-uppercase">
         <option *ngFor="let opt of OpcionesActivo" [ngValue]="opt.Id">
     {{ opt.Nombre }}
     </option>
@@ -193,7 +239,7 @@ Fecha de alta <span class="text-danger">*</span>
 
     </div>
     <!--texto: Revisar los datos ingresados...-->
-    <div id="divMsjFormRegistro" class="row alert alert-danger" *ngIf="false">
-        <i class="fa fa-exclamation-sign"></i>{{Mensajes['RD']}}
+    <div id="divMsjFormRegistro" class="row alert alert-danger" *ngIf="submitted && FormRegistro.invalid">
+    <i class="fa fa-exclamation-sign"></i>{{Mensajes['RD']}}
     </div>
     </form>

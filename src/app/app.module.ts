@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import { RouterModule } from '@angular/router';
 import {APP_BASE_HREF} from '@angular/common';
 
@@ -11,6 +11,10 @@ import { MenuComponent } from './components/menu/menu.component';
 import { ArticulosComponent } from './components/articulos/articulos.component';
 
 import { ReactiveFormsModule } from "@angular/forms";
+import {NgbPaginationModule, NgbModalModule} from "@ng-bootstrap/ng-bootstrap";
+import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
+import { MyInterceptor } from "./shared/my-interceptor/my-interceptor.component";
+
 
 @NgModule({
   declarations: [
@@ -18,7 +22,9 @@ import { ReactiveFormsModule } from "@angular/forms";
     InicioComponent,
     ArticulosFamiliasComponent,
     MenuComponent,
-    ArticulosComponent
+    ArticulosComponent,
+    ModalDialogComponent,
+    
   ],
   imports: [
     HttpClientModule,
@@ -29,11 +35,15 @@ import { ReactiveFormsModule } from "@angular/forms";
       { path: 'articulosfamilias', component: ArticulosFamiliasComponent },
       { path: 'articulos', component: ArticulosComponent }
       ]),
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      NgbPaginationModule,
+      NgbModalModule
   ],
   providers: [
-    { provide: APP_BASE_HREF, useValue: "/" }
+    { provide: APP_BASE_HREF, useValue: "/" },
+    { provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ModalDialogComponent],
 })
 export class AppModule { }
