@@ -140,7 +140,7 @@ title="{{item.Activo ? 'Desactivar':'Activar'}}"
     Precio <span class="text-danger">*</span>
     </label>
     <div class="col-sm-6">
-    <input type="text" name="Precio" class="form-control text-uppercase" formControlName="Nombre" />
+    <input type="text" name="Precio" class="form-control text-uppercase" formControlName="Precio" />
     <div class="text-danger" [ngClass]="{'is-invalid':(FormRegistro.controls.Precio.touched || submitted)
     && FormRegistro.controls.Precio.errors}">
     Dato requerido.
@@ -156,7 +156,7 @@ title="{{item.Activo ? 'Desactivar':'Activar'}}"
 Stock <span class="text-danger">*</span>
 </label>
 <div class="col-sm-6">
-<input type="text" name="Stock" class="form-control text-uppercase" formControlName="Nombre" />
+<input type="text" name="Stock" class="form-control text-uppercase" formControlName="Stock" />
 <div class="text-danger" [ngClass]="{'is-invalid':(FormRegistro.controls.Stock.touched || submitted)
 && FormRegistro.controls.Stock.errors}">
 Dato requerido.
@@ -172,7 +172,7 @@ Dato requerido.
 Codigo De Barra <span class="text-danger">*</span>
 </label>
 <div class="col-sm-6">
-<input type="text" name="CodigoDeBarra" class="form-control text-uppercase" formControlName="Nombre"/>
+<input type="text" name="CodigoDeBarra" class="form-control text-uppercase" formControlName="CodigoDeBarra"/>
 <div class="text-danger" [ngClass]="{'is-invalid':(FormRegistro.controls.CodigoDeBarra.touched || submitted)
 && FormRegistro.controls.CodigoDeBarra.errors}">
 Dato requerido.
@@ -201,7 +201,7 @@ Familia <span class="text-danger">*</span>
 Fecha de alta <span class="text-danger">*</span>
 </label>
 <div class="col-sm-6">
-    <input class="form-control text-uppercase" name="FechaAlta" formControlName="Nombre"/>
+    <input class="form-control text-uppercase" name="FechaAlta" formControlName="FechaAlta"/>
     <div class="text-danger" [ngClass]="{'is-invalid':(FormRegistro.controls.FechaAlta.touched || submitted)
     && FormRegistro.controls.FechaAlta.errors}">
     Dato requerido.

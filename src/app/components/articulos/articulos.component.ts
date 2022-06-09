@@ -40,6 +40,7 @@ export class ArticulosComponent implements OnInit {
   };
 
   Items: Articulo[]|null = null;
+
   RegistrosTotal: number = 1;
   Familias: ArticuloFamilia[]|null = null;
   Pagina = 1; // inicia pagina 1
@@ -149,7 +150,7 @@ export class ArticulosComponent implements OnInit {
     }
     //hacemos una copia de los datos del formulario, para modificar la fecha y luego enviarlo al servidor
     const itemCopy = { ...this.FormRegistro.value };
-
+    console.log(itemCopy);
     //convertir fecha de string dd/MM/yyyy a ISO para que la entienda webapi
     var arrFecha = itemCopy.FechaAlta.substr(0, 10).split("/");
     if (arrFecha.length == 3)
